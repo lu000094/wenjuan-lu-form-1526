@@ -1,0 +1,246 @@
+/* 
+   Contact Us — main stylesheet
+*/
+
+/*  Design */
+:root {
+  --slate-900:   #14151f;            /* deepest background tone        */
+  --panel:       rgba(28, 30, 46, 0.62);   /* semi-transparent panel    */
+  --panel-solid: rgba(33, 35, 51, 0.94);
+  --hairline:    rgba(255, 255, 255, 0.12);
+
+  --field-bg:    #f5f6f8;            /* near-white -> high contrast      */
+  --field-text:  #1d1e29;            /* dark text                        */
+  --field-hint:  #5e6270;            /* placeholder, readable on white   */
+  --accent-blue: #3fa7e6;            /* corner tab + focus ring         */
+
+  --amber:       #f0b24e;            /* primary button                  */
+  --amber-dark:  #e7a338;            /* button hover                    */
+  --amber-text:  #221a06;            /* dark label -> passes contrast   */
+
+  --text:        #eef0f5;            /* primary light text              */
+  --text-muted:  #c7cad6;            /* secondary text                  */
+
+  --radius:      0.4rem;
+  --radius-lg:   0.6rem;
+}
+
+/*  Reset / base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;  /* 1rem = 16px  */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;    /* everything is 1rem ... */
+  line-height: 1.5;
+  color: var(--text);
+
+  /* Contact Us page background: the supplied desk photo, held in place, */
+  /* with a dark overlay gradient layered on top to keep text readable.  */
+  background-color: var(--slate-900);
+  background-image:
+    linear-gradient(rgba(20, 21, 33, 0.55), rgba(20, 21, 33, 0.68)),
+    url("../background.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* Top bar  */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+}
+
+.topbar__brand {
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Layout: main content capped at 50rem, centred */
+.container {
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;    /* stays centred above 50rem */
+  padding: 1.5rem 1.5rem 3rem;
+}
+
+/* Intro */
+.intro {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.intro__title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;   /* rule: only <legend> is 2rem */
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.intro__subtitle {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* Form panel  */
+.contact-form {
+  margin: 0;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem;
+  /* fieldset has odd default min-width; reset it so it can shrink */
+  min-width: 0;
+}
+
+/* Legend kept for accessibility / valid grouping, but hidden visually  */
+/* for a cleaner, more professional card. */
+.card__legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Field grid  */
+/* Mobile first (smartphone, up to 25rem): single column.*/
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field__label {
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+/* Wrapper carries the little blue corner tab from the reference*/
+.field__control {
+  position: relative;
+  display: block;
+}
+
+.field__control::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 0.6rem solid var(--accent-blue);
+  border-left: 0.6rem solid transparent;
+  border-top-right-radius: var(--radius);
+  pointer-events: none;
+}
+
+/* Inputs */
+input[type="text"],
+textarea {
+  width: 100%;
+  font: inherit;                     /* inherit the 1rem body size */
+  color: var(--field-text);
+  background: var(--field-bg);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.9rem;            /* ~44px field height (touch-safe) */
+}
+
+textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: var(--field-hint);
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* Submit button */
+#submit-button {
+  font: inherit;
+  width: 100%;                       /* smartphone: full width */
+  padding: 0.85rem 2rem;
+  color: var(--amber-text);
+  background: var(--amber);
+  border: 0;
+  border-radius: var(--radius);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+#submit-button:hover {
+  background: var(--amber-dark);
+}
+
+#submit-button:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+/* 
+   Tablet (25rem–40rem) and Desktop (40rem–50rem): two-column layout.
+  
+*/
+@media (min-width: 25rem) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .field--name    { grid-column: 1; }
+  .field--email   { grid-column: 2; }
+  .field--message { grid-column: 1 / -1; }
+
+  .field--actions {
+    grid-column: 1 / -1;
+    align-items: flex-start;         /* don't stretch the button        */
+  }
+
+  #submit-button {
+    width: auto;                     /* tablet/desktop: content width   */
+  }
+}
+
+/*  Motion preference */
+@media (prefers-reduced-motion: reduce) {
+  #submit-button {
+    transition: none;
+  }
+}
